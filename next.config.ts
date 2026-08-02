@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // The OG renderer reads its fonts through readFile(process.cwd()), which the
+  // dependency tracer cannot follow. Today the card is prerendered at build
+  // time so the files are only needed then, but the moment that route turns
+  // dynamic the deployed bundle would be missing them. Trace them explicitly.
+  outputFileTracingIncludes: {
+    "/opengraph-image": ["./assets/fonts/**"],
+    "/twitter-image": ["./assets/fonts/**"],
+  },
   async headers() {
     return [
       {
