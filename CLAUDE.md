@@ -93,7 +93,11 @@ metadata — which is exactly what had happened to the home page.
   English one
 - `assets/fonts/` holds plain `.woff` copies of Ubuntu for that renderer, because
   satori cannot read the `.woff2` files `@fontsource` ships for the browser.
-  They are read with `readFile(join(process.cwd(), …))` so the build traces them
+  They are read with `readFile(join(process.cwd(), …))`, which the dependency
+  tracer **cannot** follow — `outputFileTracingIncludes` in `next.config.ts` is
+  what actually gets them into the deployed bundle. The card is prerendered at
+  build time today, so a missing font would only bite once that route turns
+  dynamic; keep the tracing entry either way
 - Home-page JSON-LD is built in `utils/constants/structured-data.constant.ts`.
   The `FAQPage` entries are read from the same message catalogs the visible FAQ
   section renders — never hand-write them separately, since markup that
