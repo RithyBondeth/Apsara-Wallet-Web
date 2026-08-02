@@ -88,6 +88,24 @@
     "deleteBody": "Delete your account from inside the app, or request deletion here on the web. Your data goes with it.",
     "deleteLink": "Request account deletion"
   },
+  "faq": {
+    "badge": "Questions",
+    "heading": "The things people ask first",
+    "description": "Short answers to what usually decides whether an app like this is worth installing.",
+    "moreLabel": "Still stuck? Read the full support page",
+    "priceTitle": "Is Apsara Wallet free?",
+    "priceBody": "Yes. Every feature described on this page is free to use. There are no ads, and we do not sell your personal or financial data.",
+    "bankTitle": "Do I have to connect my bank account?",
+    "bankBody": "No. There is no bank linking and no paperwork. You create a wallet for each place you keep money and record what you spend — which is also why it works for cash.",
+    "currencyTitle": "Can I use riel and dollars together?",
+    "currencyBody": "Yes. Enter each transaction in the currency you actually paid in. Exchange rates come from our server, so totals across both currencies stay consistent.",
+    "offlineTitle": "Does it work without internet?",
+    "offlineBody": "Your last loaded wallets, transactions, categories and budget stay readable offline. New entries need a connection to sync.",
+    "receiptsTitle": "Where do my scanned receipts go?",
+    "receiptsBody": "Nowhere. Receipt text is read by your phone, and the amount, date and merchant are filled in for you to check. The image is not uploaded to be parsed.",
+    "exitTitle": "Can I get my data out, or delete it?",
+    "exitBody": "Both. Export the transactions you are looking at to CSV at any time, and delete your account with everything in it from inside the app or from this site."
+  },
   "cta": {
     "heading": "Start tracking this month",
     "description": "Free to use. Khmer and English. No bank account required.",
@@ -106,6 +124,7 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "deleteAccount": "Delete account",
+    "faq": "FAQ",
     "support": "Support",
     "contact": "Contact us",
     "rights": "All rights reserved.",

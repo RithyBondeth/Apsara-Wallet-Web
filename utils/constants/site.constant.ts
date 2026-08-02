@@ -21,6 +21,7 @@ export const ROUTES = {
   features: "/#features",
   howItWorks: "/#how-it-works",
   security: "/#security",
+  faq: "/#faq",
   download: "/#download",
   support: "/support",
   privacy: "/privacy",
@@ -34,4 +35,17 @@ export const NAV_LINKS = [
   { key: "howItWorks", href: ROUTES.howItWorks },
   { key: "security", href: ROUTES.security },
   { key: "support", href: ROUTES.support },
+] as const;
+
+/* ---------------------------------- FAQ ----------------------------------- */
+// Shared by the landing FAQ section and the FAQPage structured data, so the two
+// can never drift. Each key prefixes the i18n lookups `${key}Title`/`${key}Body`
+// in the `faq` namespace.
+export const LANDING_FAQ_KEYS = [
+  "price",
+  "bank",
+  "currency",
+  "offline",
+  "receipts",
+  "exit",
 ] as const;
