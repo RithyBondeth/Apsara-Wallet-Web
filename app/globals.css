@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   DESIGN TOKENS
+   Ported 1:1 from the mobile design system so the marketing site and the app
+   are the same product visually:
+     apsara-wallet-mobile/lib/core/themes/app_colors.dart
+     apsara-wallet-mobile/lib/core/themes/app_gradients.dart
+   The app is light-only by design — there is deliberately no dark theme here.
+   ============================================================================ */
+@layer base {
+  :root {
+    /* ── Brand: emerald surfaces ─────────────────────────────────── */
+    --brand-emerald-deep: 156 82% 13%; /* #063D28 */
+    --brand-emerald-core: 156 79% 20%; /* #0B5B3D — AppColors.primary */
+    --brand-emerald-glow: 160 73% 27%; /* #127A52 */
+
+    /* ── Brand: gold foil accents ────────────────────────────────── */
+    --brand-gold-light: 46 74% 81%; /* #F6E7A8 */
+    --brand-gold-core: 46 65% 52%; /* #D4AF37 — AppColors.accent */
+    --brand-gold-deep: 44 67% 36%; /* #9C7A1E */
+
+    /* ── Finance semantics ───────────────────────────────────────── */
+    --finance-income: 142 76% 36%; /* #16A34A */
+    --finance-expense: 0 72% 51%; /* #DC2626 */
+
+    /* ── Neutral surface system ──────────────────────────────────── */
+    --background: 210 40% 98%; /* #F8FAFC */
+    --foreground: 222 47% 11%; /* #0F172A */
+    --card: 0 0% 100%;
+    --card-foreground: var(--foreground);
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--foreground);
+    --muted: 210 40% 96%; /* #F1F5F9 */
+    --muted-foreground: 215 16% 47%; /* #64748B */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+
+    /* ── Semantic roles ─────────────────────────────────────────── */
+    --primary: var(--brand-emerald-core);
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: var(--brand-emerald-deep);
+    --accent: var(--brand-gold-core);
+    --accent-foreground: 222 47% 11%;
+    --destructive: var(--finance-expense);
+    --destructive-foreground: 0 0% 100%;
+    --ring: var(--brand-emerald-core);
+
+    --radius: 1rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Khmer script needs a taller line box than Latin to avoid clipped
+     subscripts and diacritics. */
+  :lang(km) {
+    line-height: 1.9;
+  }
+}
+
+/* ============================================================================
+   BRAND UTILITIES
+   Reusable surfaces the landing sections compose, so no section hand-rolls
+   its own gradient. Mirrors AppGradients in the mobile app.
+   ============================================================================ */
+@layer utilities {
+  /* Deep emerald, top-lit — AppGradients.emerald */
+  .brand-emerald-surface {
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--brand-emerald-glow)) 0%,
+      hsl(var(--brand-emerald-core)) 50%,
+      hsl(var(--brand-emerald-deep)) 100%
+    );
+  }
+
+  /* Diagonal gold sheen for the wordmark and numerals — AppGradients.goldFoil */
+  .brand-gold-foil {
+    background: linear-gradient(
+      120deg,
+      hsl(var(--brand-gold-deep)) 0%,
+      hsl(var(--brand-gold-core)) 35%,
+      hsl(var(--brand-gold-light)) 50%,
+      hsl(var(--brand-gold-core)) 65%,
+      hsl(var(--brand-gold-deep)) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Animated variant — pairs with `animate-shine-sweep`. */
+  .brand-gold-foil-animated {
+    @apply brand-gold-foil animate-shine-sweep;
+  }
+
+  /* Faint blueprint grid used behind the hero. */
+  .brand-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.7) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.7) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  /* Same grid, tuned for legibility on the emerald panel. */
+  .brand-grid-inverted {
+    background-image:
+      linear-gradient(to right, hsl(0 0% 100% / 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(0 0% 100% / 0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Gold underline swash for a highlighted phrase in a heading. Painted as a
+     background on the element itself rather than a negative-z pseudo-element,
+     which would sit behind an ancestor's background in some stacking contexts. */
+  .brand-highlight {
+    background-image: linear-gradient(
+      to right,
+      hsl(var(--brand-gold-core) / 0.45),
+      hsl(var(--brand-gold-light) / 0.75)
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 0.28em;
+    background-position: 0 86%;
+    padding-inline: 0.06em;
+  }
+
+  /* Hides scrollbars on the horizontal marquee track. */
+  .brand-no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .brand-no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Respect users who ask the OS to reduce motion — the marquee, coin float and
+   gold sweep are all decorative. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
