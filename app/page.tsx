@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
+import StructuredData from "@/components/utils/structured-data";
 import { SITE } from "@/utils/constants/site.constant";
+import { buildHomeStructuredData } from "@/utils/constants/structured-data.constant";
 import { LANGUAGE_COOKIE, resolveLanguage } from "@/utils/types/app/language.type";
 
 import { HomeContent } from "./_content";
@@ -46,7 +48,18 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function IndexPage() {
+export default async function IndexPage() {
+  /* ---------------------------------- Utils --------------------------------- */
+  const language = resolveLanguage((await cookies()).get(LANGUAGE_COOKIE)?.value);
+
   /* -------------------------------- Render UI ------------------------------- */
-  return <HomeContent />;
+  return (
+    <>
+      {/* Structured Data Section */}
+      <StructuredData data={buildHomeStructuredData(language)} />
+
+      {/* Landing Sections */}
+      <HomeContent />
+    </>
+  );
 }

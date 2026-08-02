@@ -56,10 +56,10 @@ app/
 ├── (support)/            # Support, Delete Account
 ├── globals.css           # Design tokens + brand utilities
 ├── layout.tsx            # Fonts, metadata, language provider
-├── page.tsx              # Home: metadata
+├── page.tsx              # Home: metadata + structured data
 ├── _content.tsx          # Home: landing section composition
 ├── loading.tsx           # Home: route-level skeleton
-├── opengraph-image.tsx   # Generated 1200x630 social card
+├── opengraph-image.tsx   # Generated 1200×630 social card
 ├── twitter-image.tsx     # The same card, for twitter:image
 ├── manifest.ts           # manifest.webmanifest
 ├── robots.ts             # robots.txt
@@ -71,13 +71,13 @@ components/
 ├── landing/              # One folder per landing section
 ├── static-content/       # Shared shell for the long-form pages
 ├── ui/                   # shadcn/ui primitives
-└── utils/                # Typography, language provider, OG image
+└── utils/                # Typography, language, OG image, structured data
 
 language/                 # en.json, km.json (next-intl catalogs)
 lib/                      # cn() and other cross-cutting helpers
 stores/                   # Zustand stores (language, shared persistence)
 utils/
-├── constants/            # Site config, legal documents
+├── constants/            # Site config, structured data, legal documents
 ├── interfaces/           # I-prefixed interfaces
 └── types/                # T-prefixed types
 ```
@@ -88,9 +88,14 @@ that renders it, and `loading.tsx` provides the route-level skeleton.
 
 ## Search and social
 
-The home page ships a language-aware title, description and canonical URL. The
-social card is generated at build time from `components/utils/og-image`, and is
-deliberately Latin only — the Khmer face is not embedded in that renderer.
+The home page ships a language-aware title, description and canonical URL, plus
+`SoftwareApplication`, `Organization` and `FAQPage` JSON-LD built in
+`utils/constants/structured-data.constant.ts`. The FAQ entries in that markup
+are read from the same catalogs the visible FAQ section renders, so the two can
+never drift.
+
+The social card is generated at build time from `components/utils/og-image`, and
+is deliberately Latin only — the Khmer face is not embedded in that renderer.
 
 ## Design system
 

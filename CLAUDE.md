@@ -41,10 +41,10 @@ app/
 ├── (support)/          # support, delete-account
 ├── globals.css         # Design tokens and brand utilities
 ├── layout.tsx          # Fonts, metadata, language provider
-├── page.tsx            # Home: generateMetadata
+├── page.tsx            # Home: generateMetadata + JSON-LD
 ├── _content.tsx        # Home: landing section composition
 ├── loading.tsx         # Home: route-level skeleton
-├── opengraph-image.tsx # 1200x630 social card
+├── opengraph-image.tsx # 1200×630 social card
 ├── twitter-image.tsx   # Same card, for the twitter:image tag
 ├── manifest.ts
 ├── robots.ts
@@ -56,7 +56,7 @@ components/
 ├── landing/            # One folder per landing section
 ├── static-content/     # Shared shell/skeleton for long-form pages
 ├── ui/                 # shadcn/ui primitives
-└── utils/              # typography/, languages/, og-image/
+└── utils/              # typography/, languages/, og-image/, structured-data/
 
 language/               # en.json, km.json
 lib/                    # cn() helper
@@ -64,7 +64,7 @@ stores/
 ├── languages/          # Language store
 └── shared/             # Persist keys and SSR-safe storage
 utils/
-├── constants/          # site.constant.ts, legal/
+├── constants/          # site.constant.ts, structured-data.constant.ts, legal/
 ├── interfaces/         # I-prefixed interfaces
 └── types/              # T-prefixed types
 ```
@@ -98,6 +98,10 @@ metadata — which is exactly what had happened to the home page.
   what actually gets them into the deployed bundle. The card is prerendered at
   build time today, so a missing font would only bite once that route turns
   dynamic; keep the tracing entry either way
+- Home-page JSON-LD is built in `utils/constants/structured-data.constant.ts`.
+  The `FAQPage` entries are read from the same message catalogs the visible FAQ
+  section renders — never hand-write them separately, since markup that
+  disagrees with the page is what gets rich results penalised
 
 ### Component Organisation
 

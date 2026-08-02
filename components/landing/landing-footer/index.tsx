@@ -29,7 +29,10 @@ const FOOTER_COLUMNS = [
   },
   {
     headingKey: "supportHeading",
-    links: [{ key: "support", href: ROUTES.support }],
+    links: [
+      { key: "faq", href: ROUTES.faq },
+      { key: "support", href: ROUTES.support },
+    ],
   },
 ] as const;
 
