@@ -37,41 +37,67 @@ Those four routes are compliance surface. Do not rename or remove them.
 
 ```
 app/
-├── (legal)/          # privacy, terms
-├── (support)/        # support, delete-account
-├── globals.css       # Design tokens and brand utilities
-├── layout.tsx        # Fonts, metadata, language provider
-├── page.tsx          # Landing page composition
+├── (legal)/            # privacy, terms
+├── (support)/          # support, delete-account
+├── globals.css         # Design tokens and brand utilities
+├── layout.tsx          # Fonts, metadata, language provider
+├── page.tsx            # Home: generateMetadata
+├── _content.tsx        # Home: landing section composition
+├── loading.tsx         # Home: route-level skeleton
+├── opengraph-image.tsx # 1200x630 social card
+├── twitter-image.tsx   # Same card, for the twitter:image tag
+├── manifest.ts
 ├── robots.ts
 └── sitemap.ts
 
+assets/fonts/           # Ubuntu woff, read by the OG renderer only
 components/
-├── header/           # Site header + mobile navigation
-├── landing/          # One folder per landing section
-├── static-content/   # Shared shell/skeleton for long-form pages
-├── ui/               # shadcn/ui primitives
-└── utils/            # typography/, languages/
+├── header/             # Site header + mobile navigation
+├── landing/            # One folder per landing section
+├── static-content/     # Shared shell/skeleton for long-form pages
+├── ui/                 # shadcn/ui primitives
+└── utils/              # typography/, languages/, og-image/
 
-language/             # en.json, km.json
-lib/                  # cn() helper
+language/               # en.json, km.json
+lib/                    # cn() helper
 stores/
-├── languages/        # Language store
-└── shared/           # Persist keys and SSR-safe storage
+├── languages/          # Language store
+└── shared/             # Persist keys and SSR-safe storage
 utils/
-├── constants/        # site.constant.ts, legal/
-├── interfaces/       # I-prefixed interfaces
-└── types/            # T-prefixed types
+├── constants/          # site.constant.ts, legal/
+├── interfaces/         # I-prefixed interfaces
+└── types/              # T-prefixed types
 ```
 
 ## Development Guidelines
 
 ### Route Organisation
 
-Every long-form route follows the same three-file split:
+Every route, including the home page, follows the same three-file split:
 
 - `page.tsx` — server component; owns `generateMetadata` and reads the language cookie
 - `_content.tsx` — client component; renders the page
 - `loading.tsx` — route-level skeleton
+
+Keep `page.tsx` a server component. The moment it becomes `"use client"` the
+route silently loses `generateMetadata`, its canonical URL and its Khmer
+metadata — which is exactly what had happened to the home page.
+
+### Metadata & SEO
+
+- Every route sets its own `alternates.canonical` and a language-aware title and
+  description — the home page reads the same cookie the rest of the site does
+- The social card is generated at build time by `app/opengraph-image.tsx` from
+  `components/utils/og-image`. It is **Latin only**: the Khmer face is not
+  embedded in that renderer, and a card full of tofu boxes is worse than an
+  English one
+- `assets/fonts/` holds plain `.woff` copies of Ubuntu for that renderer, because
+  satori cannot read the `.woff2` files `@fontsource` ships for the browser.
+  They are read with `readFile(join(process.cwd(), …))`, which the dependency
+  tracer **cannot** follow — `outputFileTracingIncludes` in `next.config.ts` is
+  what actually gets them into the deployed bundle. The card is prerendered at
+  build time today, so a missing font would only bite once that route turns
+  dynamic; keep the tracing entry either way
 
 ### Component Organisation
 

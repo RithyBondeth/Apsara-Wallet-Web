@@ -56,16 +56,22 @@ app/
 ├── (support)/            # Support, Delete Account
 ├── globals.css           # Design tokens + brand utilities
 ├── layout.tsx            # Fonts, metadata, language provider
-├── page.tsx              # Landing page composition
+├── page.tsx              # Home: metadata
+├── _content.tsx          # Home: landing section composition
+├── loading.tsx           # Home: route-level skeleton
+├── opengraph-image.tsx   # Generated 1200x630 social card
+├── twitter-image.tsx     # The same card, for twitter:image
+├── manifest.ts           # manifest.webmanifest
 ├── robots.ts             # robots.txt
 └── sitemap.ts            # sitemap.xml
 
+assets/fonts/             # Ubuntu .woff, read by the OG image renderer
 components/
 ├── header/               # Site header with mobile nav
 ├── landing/              # One folder per landing section
 ├── static-content/       # Shared shell for the long-form pages
 ├── ui/                   # shadcn/ui primitives
-└── utils/                # Typography, language provider & toggle
+└── utils/                # Typography, language provider, OG image
 
 language/                 # en.json, km.json (next-intl catalogs)
 lib/                      # cn() and other cross-cutting helpers
@@ -76,9 +82,15 @@ utils/
 └── types/                # T-prefixed types
 ```
 
-Each route follows the `apsaratalent-web` split: `page.tsx` is a server
+Every route follows the `apsaratalent-web` split: `page.tsx` is a server
 component that owns `generateMetadata`, `_content.tsx` is the client component
 that renders it, and `loading.tsx` provides the route-level skeleton.
+
+## Search and social
+
+The home page ships a language-aware title, description and canonical URL. The
+social card is generated at build time from `components/utils/og-image`, and is
+deliberately Latin only — the Khmer face is not embedded in that renderer.
 
 ## Design system
 
