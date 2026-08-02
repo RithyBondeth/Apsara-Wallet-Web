@@ -39,6 +39,12 @@ export const metadata: Metadata = {
     description:
       "A personal finance app built for Cambodia — multi-wallet, bilingual, and private by default.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} — Personal finance that speaks Khmer`,
+    description:
+      "A personal finance app built for Cambodia — multi-wallet, bilingual, and private by default.",
+  },
   robots: {
     index: true,
     follow: true,
