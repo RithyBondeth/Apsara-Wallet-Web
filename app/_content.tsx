@@ -2,6 +2,7 @@
 
 import Header from "@/components/header";
 import LandingCta from "@/components/landing/landing-cta";
+import LandingFaq from "@/components/landing/landing-faq";
 import LandingFeatures from "@/components/landing/landing-features";
 import LandingFooter from "@/components/landing/landing-footer";
 import LandingHero from "@/components/landing/landing-hero";
@@ -31,7 +32,10 @@ export function HomeContent() {
       {/* Section 5: Security & Privacy */}
       <LandingSecurity />
 
-      {/* Section 6: Download CTA */}
+      {/* Section 6: FAQ */}
+      <LandingFaq />
+
+      {/* Section 7: Download CTA */}
       <LandingCta />
 
       {/* Footer */}
