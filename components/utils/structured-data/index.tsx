@@ -9,9 +9,13 @@ export default function StructuredData({ data }: IStructuredDataProps) {
   return (
     <script
       type="application/ld+json"
-      // The payload is built from our own constants and message catalogs, never
-      // from user input, so there is nothing here to escape.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      // The payload comes from our own constants and catalogs, but those are
+      // marketing copy that non-engineers edit. Escaping `<` keeps a stray
+      // "</script>" in a translation from closing this tag early; it stays
+      // valid JSON, so consumers are unaffected.
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }

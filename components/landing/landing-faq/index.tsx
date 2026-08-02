@@ -45,24 +45,26 @@ export default function LandingFaq() {
 
         {/* Question List Section */}
         {/* Native <details> so the accordion works before hydration and stays
-            keyboard- and screen-reader-navigable without extra JS. */}
-        <dl className="flex flex-col gap-px overflow-hidden rounded-2xl border border-border bg-border">
+            keyboard- and screen-reader-navigable without extra JS. Deliberately
+            not a <dl>: its content model allows only dt/dd/div, so wrapping
+            <details> in one — as the /support list can — would be invalid. */}
+        <div className="flex flex-col gap-px overflow-hidden rounded-2xl border border-border bg-border">
           {LANDING_FAQ_KEYS.map((key) => (
             <details key={key} className="group bg-card">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 p-6 transition-colors hover:bg-muted/60 [&::-webkit-details-marker]:hidden">
-                <dt className="text-sm font-semibold text-emerald-deep sm:text-base">
+                <h3 className="text-sm font-semibold text-emerald-deep sm:text-base">
                   {t(`${key}Title`)}
-                </dt>
+                </h3>
                 <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary/10 text-primary transition-transform duration-200 group-open:rotate-45">
                   <LucidePlus className="size-4" strokeWidth={2} />
                 </span>
               </summary>
-              <dd className="px-6 pb-6 pr-16 text-sm leading-relaxed text-muted-foreground">
+              <p className="px-6 pb-6 pr-16 text-sm leading-relaxed text-muted-foreground">
                 {t(`${key}Body`)}
-              </dd>
+              </p>
             </details>
           ))}
-        </dl>
+        </div>
       </div>
     </section>
   );
