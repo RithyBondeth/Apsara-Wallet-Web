@@ -22,7 +22,7 @@ import type {
 // Account) so they read as one document family rather than four one-offs.
 export function StaticPageShell({
   pageNumber,
-  pageTotal = "04",
+  pageTotal = "05",
   title,
   subtitle,
   meta,
