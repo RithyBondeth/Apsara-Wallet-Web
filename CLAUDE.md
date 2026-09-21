@@ -22,6 +22,11 @@ It has a second job beyond marketing: hosting the public URLs that Google Play
 and the App Store require — `/privacy`, `/terms`, `/delete-account`, `/support`.
 Those four routes are compliance surface. Do not rename or remove them.
 
+It also hosts the mobile app's deep-link surface: `/.well-known/apple-app-site-association`
+and `/.well-known/assetlinks.json` (Universal Links / App Links) and the
+`/reset-password` fallback page the password-reset email lands on when the
+app is not installed. See "App links" below.
+
 ## Architecture
 
 ### Framework & Stack
@@ -38,7 +43,8 @@ Those four routes are compliance surface. Do not rename or remove them.
 ```
 app/
 ├── (legal)/            # privacy, terms
-├── (support)/          # support, delete-account
+├── (support)/          # support, delete-account, reset-password
+├── .well-known/        # apple-app-site-association, assetlinks.json (route handlers)
 ├── globals.css         # Design tokens and brand utilities
 ├── layout.tsx          # Fonts, metadata, language provider
 ├── page.tsx            # Home: generateMetadata + JSON-LD
@@ -132,6 +138,23 @@ explain *why*, not what the next line obviously does.
 - Brand colours in Tailwind: `emerald-{deep,core,glow}`, `gold-{light,core,deep}`, `finance-{income,expense}`
 - The app is light-only — do not add a dark theme (this was removed from the mobile app at the owner's request)
 - Decorative motion must stay behind the `prefers-reduced-motion` guard already in `globals.css`
+
+### App links
+
+- The two `/.well-known` files are Next route handlers, not static files, so
+  they can read `APPLE_TEAM_ID` and `ANDROID_CERT_SHA256` from the environment
+  (`utils/constants/app-links.constant.ts`). Both **404 while their variable
+  is unset** — a wrong app ID gets cached by Apple's CDN and is much harder to
+  undo than a missing file. The variables are needed at build time
+- Apple requires `application/json` with no extension and no redirect; Google
+  requires the same over HTTPS. Never put these behind a redirect or a
+  trailing-slash rewrite
+- `/reset-password` is the browser fallback for the reset email. It must keep
+  the `?token=` query and hand it to `apsarawallet://reset-password?token=` via a
+  plain `<a>` — Next's `<Link>` must not touch a custom scheme. It is `noindex`
+  and deliberately absent from the sitemap
+- The app claims only the paths in `APP_LINK_PATHS`; everything else on the
+  domain opens in the browser
 
 ### Internationalisation
 

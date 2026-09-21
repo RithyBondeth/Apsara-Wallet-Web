@@ -27,6 +27,7 @@ export const ROUTES = {
   privacy: "/privacy",
   terms: "/terms",
   deleteAccount: "/delete-account",
+  resetPassword: "/reset-password",
 } as const;
 
 /** Header navigation, in display order. Labels resolve from the `header` namespace. */

@@ -167,5 +167,18 @@
     "retainedHeading": "What we may keep",
     "retainedBody": "Records we are required to retain by law, and anonymous aggregate counts that cannot be traced back to you.",
     "exportTip": "Want a copy first? Export your transactions to CSV from Transaction History before you delete — we cannot recover the data afterwards."
+  },
+  "resetPassword": {
+    "title": "Reset your password",
+    "intro": "You followed a password-reset link from an Apsara Wallet email. The new password is set inside the app, not on this page.",
+    "openHeading": "Open the link in the app",
+    "openBody": "If Apsara Wallet is installed on this device, the button below hands the link to it and you can choose a new password there.",
+    "openCta": "Open in Apsara Wallet",
+    "openNote": "Reset links expire after a short time and work once. If the app says the link is invalid, request a new one from the sign-in screen.",
+    "missingToken": "This page was opened without a reset token. Use the link from the email you received, or request a new one from the sign-in screen in the app.",
+    "installHeading": "Don't have the app on this device?",
+    "installBody": "Install Apsara Wallet, then open the same link from your email on that device.",
+    "helpPrefix": "Still stuck? See",
+    "helpLink": "Support"
   }
 }
