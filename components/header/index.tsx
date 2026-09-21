@@ -73,7 +73,7 @@ export default function Header({ className }: IHeaderProps) {
             size="icon"
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
-            aria-label="Toggle navigation"
+            aria-label={t("toggleNavigation")}
             onClick={() => setMobileOpen((open) => !open)}
           >
             {mobileOpen ? <LucideX /> : <LucideMenu />}
