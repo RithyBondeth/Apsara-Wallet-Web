@@ -1,8 +1,8 @@
 /* ----------------------------------- Site ---------------------------------- */
 export const SITE = {
   name: "Apsara Wallet",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://apsarawallet.com",
-  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "support@apsarawallet.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://wallet.apsara.social",
+  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "support@apsara.social",
   // Kept in step with AppConstants.appVersion in the mobile app.
   appVersion: "1.0.0",
 } as const;
