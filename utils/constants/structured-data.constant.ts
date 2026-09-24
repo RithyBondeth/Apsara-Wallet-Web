@@ -1,7 +1,9 @@
 import enMessages from "@/language/en.json";
 import kmMessages from "@/language/km.json";
 import {
+  DEVELOPER,
   LANDING_FAQ_KEYS,
+  ROUTES,
   SITE,
   STORE_LINKS,
 } from "@/utils/constants/site.constant";
@@ -40,10 +42,26 @@ export function buildHomeStructuredData(language: TLanguage) {
     areaServed: { "@type": "Country", name: "Cambodia" },
   };
 
+  // The app is published by an individual, not by the brand — the same person
+  // /about names, so the markup and the page agree.
+  const developer = {
+    "@type": "Person",
+    "@id": `${SITE.url}/#developer`,
+    name: DEVELOPER.name,
+    email: DEVELOPER.email,
+    url: `${SITE.url}${ROUTES.about}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: DEVELOPER.city,
+      addressCountry: DEVELOPER.countryCode,
+    },
+  };
+
   return {
     "@context": "https://schema.org",
     "@graph": [
-      organization,
+      { ...organization, founder: { "@id": developer["@id"] } },
+      developer,
       {
         "@type": "SoftwareApplication",
         "@id": `${SITE.url}/#app`,
@@ -54,7 +72,8 @@ export function buildHomeStructuredData(language: TLanguage) {
         softwareVersion: SITE.appVersion,
         inLanguage: ["en", "km"],
         description: MESSAGES[language].hero.description,
-        publisher: { "@id": organization["@id"] },
+        author: { "@id": developer["@id"] },
+        publisher: { "@id": developer["@id"] },
         ...(installUrls.length > 0 ? { installUrl: installUrls } : {}),
         // Free to use — stated explicitly so the listing is not shown as paid.
         offers: {

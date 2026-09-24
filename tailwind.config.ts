@@ -48,6 +48,7 @@ export default {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
+          faint: "hsl(var(--muted-faint))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
@@ -75,6 +76,13 @@ export default {
         finance: {
           income: "hsl(var(--finance-income))",
           expense: "hsl(var(--finance-expense))",
+          info: "hsl(var(--finance-info))",
+          warning: "hsl(var(--finance-warning))",
+        },
+        ivory: "hsl(var(--brand-ivory))",
+        wallet: {
+          navy: "hsl(var(--wallet-navy))",
+          sky: "hsl(var(--wallet-sky))",
         },
       },
       borderRadius: {
@@ -87,19 +95,34 @@ export default {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" },
         },
-        "coin-float": {
-          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "50%": { transform: "translateY(-14px) rotate(6deg)" },
+        // Opacity is fully in by 40% while the rise carries on, so the stage
+        // is never a long, ghostly half-fade.
+        "hero-rise": {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "40%": { opacity: "1" },
+          "100%": { opacity: "1", transform: "none" },
         },
-        "shine-sweep": {
-          from: { backgroundPosition: "200% center" },
-          to: { backgroundPosition: "-200% center" },
+        "chip-in": {
+          from: { opacity: "0", transform: "translateY(8px) scale(0.96)" },
+          to: { opacity: "1", transform: "none" },
+        },
+        // Moves a full-height track, so the line inside it sweeps the whole
+        // receipt without animating `top`.
+        "scan-sweep": {
+          from: { transform: "translateY(0%)" },
+          to: { transform: "translateY(100%)" },
+        },
+        "caret-blink": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
         },
       },
       animation: {
-        "marquee-scroll": "marquee-scroll 32s linear infinite",
-        "coin-float": "coin-float 6s ease-in-out infinite",
-        "shine-sweep": "shine-sweep 6s linear infinite",
+        "marquee-scroll": "marquee-scroll 48s linear infinite",
+        "hero-rise": "hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both",
+        "chip-in": "chip-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both",
+        "scan-sweep": "scan-sweep 2.6s ease-in-out infinite alternate",
+        "caret-blink": "caret-blink 1.1s steps(1) infinite",
       },
     },
   },

@@ -7,6 +7,20 @@ export const SITE = {
   appVersion: "1.0.0",
 } as const;
 
+/* --------------------------------- Developer -------------------------------- */
+// The publisher shown on /about and in the structured data. Must match the
+// developer account on Google Play and the App Store exactly — store reviewers
+// compare the two. Confirmed by the owner on 2026-09-24.
+export const DEVELOPER = {
+  name: "Rithy Bondeth",
+  // Family name first, as Khmer names are written — the given name is the one
+  // the app's greeting would use.
+  givenName: "Bondeth",
+  email: "rithybondeth999@gmail.com",
+  city: "Phnom Penh",
+  countryCode: "KH",
+} as const;
+
 /* -------------------------------- Store Links ------------------------------- */
 // Empty until the listings go live — the download buttons read these and fall
 // back to a disabled "coming soon" state, so no link ever 404s.
@@ -28,6 +42,7 @@ export const ROUTES = {
   terms: "/terms",
   deleteAccount: "/delete-account",
   resetPassword: "/reset-password",
+  about: "/about",
 } as const;
 
 /** Header navigation, in display order. Labels resolve from the `header` namespace. */
@@ -36,6 +51,7 @@ export const NAV_LINKS = [
   { key: "howItWorks", href: ROUTES.howItWorks },
   { key: "security", href: ROUTES.security },
   { key: "support", href: ROUTES.support },
+  { key: "about", href: ROUTES.about },
 ] as const;
 
 /* ---------------------------------- FAQ ----------------------------------- */

@@ -74,18 +74,20 @@ export async function renderBrandOgImage() {
 
         {/* Headline block */}
         <div style={{ display: "flex", flexDirection: "column" }}>
+          {/* The app's tagline — the same headline the home page leads with */}
           <div
             style={{
               display: "flex",
-              fontSize: 92,
+              flexDirection: "column",
+              fontSize: 88,
               fontWeight: 700,
               letterSpacing: "-0.03em",
               color: "#FFFFFF",
               lineHeight: 1.05,
             }}
           >
-            <span style={{ color: GOLD_CORE, marginRight: 22 }}>Every riel</span>
-            <span>accounted for</span>
+            <span style={{ color: GOLD_CORE }}>Smart finance,</span>
+            <span>better future</span>
           </div>
           <div
             style={{

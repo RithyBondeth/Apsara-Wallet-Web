@@ -11,6 +11,7 @@ const SITEMAP_PATHS = [
   { path: "/terms", priority: 0.8 },
   { path: "/support", priority: 0.7 },
   { path: "/delete-account", priority: 0.6 },
+  { path: "/about", priority: 0.6 },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
