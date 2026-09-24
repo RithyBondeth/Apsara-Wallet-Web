@@ -27,18 +27,22 @@ export default function LandingMarquee() {
   return (
     <section
       aria-hidden
-      className="brand-no-scrollbar overflow-hidden border-b border-border bg-emerald-deep py-4"
+      className="brand-no-scrollbar group relative overflow-hidden bg-emerald-deep py-5"
     >
-      <div className="flex w-max animate-marquee-scroll items-center">
-        {track.map((key, index) => (
-          <span
-            key={`${key}-${index}`}
-            className="flex items-center gap-6 px-6 text-sm font-semibold uppercase tracking-[0.18em] text-white/70"
-          >
-            {t(key)}
-            <span className="size-1.5 rounded-full bg-gold-core" />
-          </span>
-        ))}
+      <div className="brand-marquee-fade">
+        {/* Pauses under the pointer, so a reader can catch an item */}
+        <div className="flex w-max animate-marquee-scroll items-center group-hover:[animation-play-state:paused]">
+          {track.map((key, index) => (
+            <span
+              key={`${key}-${index}`}
+              className="flex items-center gap-8 px-8 text-sm font-medium uppercase tracking-wide text-white/75"
+            >
+              {t(key)}
+              {/* Gold diamond, the coin mark from the logo */}
+              <span className="size-2 rotate-45 rounded-[2px] bg-gradient-to-br from-gold-light to-gold-core" />
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );
