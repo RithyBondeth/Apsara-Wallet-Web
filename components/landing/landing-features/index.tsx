@@ -10,19 +10,48 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { TypographyH2 } from "@/components/utils/typography/typography-h2";
-import { TypographyH3 } from "@/components/utils/typography/typography-h3";
-import { TypographyMuted } from "@/components/utils/typography/typography-muted";
+import {
+  AnalyticsArt,
+  BudgetArt,
+  ReceiptArt,
+  SavingsArt,
+  TransactionArt,
+  WalletsArt,
+} from "@/components/landing/landing-feature-art";
+import LandingSectionHeading from "@/components/landing/landing-section-heading";
+import Reveal from "@/components/utils/reveal";
+import { cn } from "@/lib/utils";
 
 /* --------------------------------- Constants -------------------------------- */
 // `key` prefixes the i18n lookups: `${key}Title` and `${key}Body`.
+// Bento placement on lg (3 columns): wallets is the wide lead tile, receipts
+// runs down the right edge, analytics closes the grid wide. On sm the wide
+// tiles span both columns and receipts sits in the flow. Every tile is light;
+// the emerald comes from the app screens drawn inside them.
 const FEATURES = [
-  { key: "wallets", icon: LucideWallet, number: "01" },
-  { key: "transactions", icon: LucideReceipt, number: "02" },
-  { key: "receipts", icon: LucideScanLine, number: "03" },
-  { key: "budgets", icon: LucidePiggyBank, number: "04" },
-  { key: "savings", icon: LucideTarget, number: "05" },
-  { key: "analytics", icon: LucideChartPie, number: "06" },
+  {
+    key: "wallets",
+    icon: LucideWallet,
+    art: WalletsArt,
+    className: "sm:col-span-2",
+  },
+  {
+    key: "receipts",
+    icon: LucideScanLine,
+    art: ReceiptArt,
+    className: "lg:row-span-2",
+    // The camera view is dark in the app, so this well is too.
+    artClassName: "h-auto min-h-[33rem] bg-none bg-emerald-deep lg:flex-1",
+  },
+  { key: "transactions", icon: LucideReceipt, art: TransactionArt },
+  { key: "budgets", icon: LucidePiggyBank, art: BudgetArt },
+  { key: "savings", icon: LucideTarget, art: SavingsArt },
+  {
+    key: "analytics",
+    icon: LucideChartPie,
+    art: AnalyticsArt,
+    className: "sm:col-span-2",
+  },
 ] as const;
 
 export default function LandingFeatures() {
@@ -31,52 +60,62 @@ export default function LandingFeatures() {
 
   /* -------------------------------- Render UI ------------------------------- */
   return (
-    <section
-      id="features"
-      className="scroll-mt-[72px] border-b border-border bg-background"
-    >
-      <div className="mx-auto max-w-7xl px-6 py-20 sm:px-10 lg:px-14 lg:py-28">
+    <section id="features" className="scroll-mt-[72px] bg-background">
+      <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 lg:px-14 lg:py-32">
         {/* Section Heading */}
-        <div className="max-w-3xl">
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8 bg-primary" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-              {t("badge")}
-            </span>
-          </div>
-          <TypographyH2 className="text-emerald-deep">
-            {t("heading")}
-          </TypographyH2>
-          <TypographyMuted className="mt-5 text-base !leading-relaxed">
-            {t("description")}
-          </TypographyMuted>
-        </div>
+        <Reveal>
+          <LandingSectionHeading
+            className="reveal-item"
+            badge={t("badge")}
+            heading={t("heading")}
+            description={t("description")}
+          />
+        </Reveal>
 
-        {/* Feature Grid Section */}
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((feature) => (
-            <li
-              key={feature.key}
-              className="group flex flex-col bg-card p-7 transition-colors hover:bg-muted/60"
-            >
-              <div className="flex items-center justify-between">
-                <span className="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <feature.icon className="size-5" strokeWidth={1.75} />
-                </span>
-                <span className="text-xs font-semibold tabular-nums text-muted-foreground/60">
-                  {feature.number}
-                </span>
-              </div>
+        {/* Bento Grid Section */}
+        <Reveal>
+          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+            {FEATURES.map((feature, index) => {
+              const Art = feature.art;
 
-              <TypographyH3 className="mt-5 text-emerald-deep">
-                {t(`${feature.key}Title`)}
-              </TypographyH3>
-              <TypographyMuted className="mt-2.5 !leading-relaxed">
-                {t(`${feature.key}Body`)}
-              </TypographyMuted>
-            </li>
-          ))}
-        </ul>
+              return (
+                <li
+                  key={feature.key}
+                  style={{ "--reveal-index": index } as React.CSSProperties}
+                  className={cn(
+                    "reveal-item group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-border bg-card p-2 shadow-sm transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-deep/10",
+                    "className" in feature && feature.className,
+                  )}
+                >
+                  {/* Illustration Well Section */}
+                  <div
+                    className={cn(
+                      "relative h-60 overflow-hidden rounded-[1.35rem] bg-gradient-to-b from-muted to-muted/40",
+                      "artClassName" in feature && feature.artClassName,
+                    )}
+                  >
+                    <Art />
+                  </div>
+
+                  {/* Copy Section */}
+                  <div className="flex gap-4 p-5 pt-6">
+                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+                      <feature.icon className="size-5" strokeWidth={1.75} />
+                    </span>
+                    <div>
+                      <h3 className="text-lg font-semibold tracking-tight text-emerald-deep">
+                        {t(`${feature.key}Title`)}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                        {t(`${feature.key}Body`)}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

@@ -15,6 +15,12 @@ const STORES = [
   { key: "appStore", label: "App Store", icon: LucideSmartphone },
 ] as const;
 
+// Store-badge shape: icon beside a small caption over the store name. The
+// disabled state keeps most of its opacity because the caption already says
+// "Coming soon" — a half-faded badge just reads as broken.
+const BADGE_CLASS_NAME =
+  "h-14 w-full justify-start gap-3 rounded-2xl px-5 text-left disabled:opacity-75 sm:w-auto sm:min-w-[11.5rem] [&_svg]:size-6";
+
 export default function LandingStoreButtons({
   className,
   variant = "gold",
@@ -27,6 +33,17 @@ export default function LandingStoreButtons({
     <div className={cn("flex flex-col gap-3 sm:flex-row", className)}>
       {STORES.map((store) => {
         const href = STORE_LINKS[store.key];
+        const label = (
+          <>
+            <store.icon />
+            <span className="flex flex-col leading-none">
+              <span className="text-[10px] font-medium uppercase tracking-wide opacity-75">
+                {href ? tCommon("availableOn") : tCommon("comingSoon")}
+              </span>
+              <span className="mt-1 text-base font-bold">{store.label}</span>
+            </span>
+          </>
+        );
 
         // Until a listing URL is configured the button renders disabled rather
         // than linking somewhere that would 404.
@@ -39,10 +56,9 @@ export default function LandingStoreButtons({
               variant={variant}
               disabled
               aria-disabled
-              className="w-full sm:w-auto"
+              className={BADGE_CLASS_NAME}
             >
-              <store.icon />
-              {store.label} · {tCommon("comingSoon")}
+              {label}
             </Button>
           );
         }
@@ -53,11 +69,10 @@ export default function LandingStoreButtons({
             asChild
             size="lg"
             variant={variant}
-            className="w-full sm:w-auto"
+            className={BADGE_CLASS_NAME}
           >
             <Link href={href} target="_blank" rel="noopener noreferrer">
-              <store.icon />
-              {store.label}
+              {label}
             </Link>
           </Button>
         );

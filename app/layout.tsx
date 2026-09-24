@@ -5,7 +5,11 @@ import { LanguageProvider } from "@/components/utils/languages/language-provider
 import { LANGUAGE_COOKIE, resolveLanguage } from "@/utils/types/app/language.type";
 import { SITE } from "@/utils/constants/site.constant";
 
-import "@fontsource/preahvihear/khmer-400.css";
+// Same pairing as the mobile app (AppFont): Ubuntu for Latin, with Kantumruy
+// Pro picking up every Khmer glyph. It is a variable font, so one file carries
+// every weight the site uses. Its Latin faces are declared too but never
+// downloaded: Ubuntu comes first in the stack, so no Latin text falls through.
+import "@fontsource-variable/kantumruy-pro/wght.css";
 import "@fontsource/ubuntu/latin-400.css";
 import "@fontsource/ubuntu/latin-500.css";
 import "@fontsource/ubuntu/latin-700.css";
@@ -70,10 +74,12 @@ export default async function RootLayout({
   /* -------------------------------- Render UI ------------------------------- */
   return (
     /* ------------------------------- Main Layout ------------------------------ */
-    <html lang={language} dir="ltr" suppressHydrationWarning>
+    // data-scroll-behavior tells Next.js the page scrolls smoothly (see
+    // globals.css), so it skips the glide when a navigation resets scroll.
+    <html lang={language} dir="ltr" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
         className="antialiased"
-        style={{ fontFamily: "Ubuntu, Preahvihear, sans-serif" }}
+        style={{ fontFamily: "Ubuntu, 'Kantumruy Pro Variable', sans-serif" }}
         suppressHydrationWarning
       >
         {/* Language Provider Section */}

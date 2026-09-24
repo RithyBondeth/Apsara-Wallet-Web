@@ -13,9 +13,9 @@ import LandingSecurity from "@/components/landing/landing-security";
 export function HomeContent() {
   /* -------------------------------- Render UI ------------------------------- */
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen overflow-x-clip bg-background text-foreground">
       {/* Header Section */}
-      <Header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl" />
+      <Header className="fixed inset-x-0 top-0 z-50" />
 
       {/* Section 1: Hero */}
       <LandingHero />

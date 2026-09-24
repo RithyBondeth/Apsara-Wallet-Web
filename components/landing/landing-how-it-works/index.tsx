@@ -3,9 +3,8 @@
 import { LucideLineChart, LucidePencilLine, LucideWalletCards } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { TypographyH2 } from "@/components/utils/typography/typography-h2";
-import { TypographyH3 } from "@/components/utils/typography/typography-h3";
-import { TypographyMuted } from "@/components/utils/typography/typography-muted";
+import LandingSectionHeading from "@/components/landing/landing-section-heading";
+import Reveal from "@/components/utils/reveal";
 
 /* --------------------------------- Constants -------------------------------- */
 const STEPS = [
@@ -22,50 +21,54 @@ export default function LandingHowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="scroll-mt-[72px] border-b border-border bg-muted/40"
+      className="relative scroll-mt-[72px] overflow-hidden border-y border-border bg-muted/50"
     >
-      <div className="mx-auto max-w-7xl px-6 py-20 sm:px-10 lg:px-14 lg:py-28">
+      <div className="relative mx-auto max-w-7xl px-6 py-24 sm:px-10 lg:px-14 lg:py-32">
         {/* Section Heading */}
-        <div className="max-w-3xl">
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8 bg-primary" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-              {t("badge")}
-            </span>
-          </div>
-          <TypographyH2 className="text-emerald-deep">
-            {t("heading")}
-          </TypographyH2>
-          <TypographyMuted className="mt-5 text-base !leading-relaxed">
-            {t("description")}
-          </TypographyMuted>
-        </div>
+        <Reveal>
+          <LandingSectionHeading
+            className="reveal-item"
+            align="center"
+            badge={t("badge")}
+            heading={t("heading")}
+            description={t("description")}
+          />
+        </Reveal>
 
         {/* Steps Section */}
-        <ol className="mt-14 grid gap-8 md:grid-cols-3">
-          {STEPS.map((step) => (
-            <li
-              key={step.key}
-              className="relative rounded-2xl border border-border bg-card p-7"
-            >
-              {/* Step number watermark */}
-              <span className="brand-gold-foil absolute right-6 top-5 text-4xl font-extrabold tabular-nums">
-                {step.number}
-              </span>
+        <Reveal>
+          <ol className="relative mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
+            {/* Connector running between the three step icons, dashed so it
+                reads as a path rather than a divider */}
+            <span
+              aria-hidden
+              className="absolute left-[16.67%] right-[16.67%] top-9 hidden border-t-2 border-dashed border-gold-core/50 md:block"
+            />
 
-              <span className="grid size-11 place-items-center rounded-xl bg-emerald-deep text-white">
-                <step.icon className="size-5" strokeWidth={1.75} />
-              </span>
+            {STEPS.map((step, index) => (
+              <li
+                key={step.key}
+                style={{ "--reveal-index": index } as React.CSSProperties}
+                className="reveal-item group relative flex flex-col items-center px-2 text-center"
+              >
+                {/* Step Icon */}
+                <span className="brand-emerald-surface relative grid size-[4.5rem] place-items-center rounded-[1.4rem] text-white shadow-xl shadow-emerald-deep/25 transition-transform duration-300 group-hover:-translate-y-1">
+                  <step.icon className="size-7" strokeWidth={1.6} />
+                  <span className="absolute -right-2.5 -top-2.5 grid size-8 place-items-center rounded-full bg-gold-core text-xs font-bold tabular-nums text-emerald-deep shadow-md">
+                    {step.number}
+                  </span>
+                </span>
 
-              <TypographyH3 className="mt-5 text-emerald-deep">
-                {t(`${step.key}Title`)}
-              </TypographyH3>
-              <TypographyMuted className="mt-2.5 !leading-relaxed">
-                {t(`${step.key}Body`)}
-              </TypographyMuted>
-            </li>
-          ))}
-        </ol>
+                <h3 className="mt-7 text-xl font-semibold tracking-tight text-emerald-deep">
+                  {t(`${step.key}Title`)}
+                </h3>
+                <p className="mt-3 max-w-xs text-pretty text-sm leading-relaxed text-muted-foreground">
+                  {t(`${step.key}Body`)}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
       </div>
     </section>
   );

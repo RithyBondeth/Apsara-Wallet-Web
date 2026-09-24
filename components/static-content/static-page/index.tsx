@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import Header from "@/components/header";
 import LandingFooter from "@/components/landing/landing-footer";
+import BrandWaves from "@/components/utils/brand-waves";
 import { TypographyH3 } from "@/components/utils/typography/typography-h3";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/utils/constants/site.constant";
@@ -22,7 +23,7 @@ import type {
 // Account) so they read as one document family rather than four one-offs.
 export function StaticPageShell({
   pageNumber,
-  pageTotal = "05",
+  pageTotal = "06",
   title,
   subtitle,
   meta,
@@ -37,11 +38,12 @@ export function StaticPageShell({
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       {/* Page Header Section */}
-      <Header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl" />
+      <Header className="fixed inset-x-0 top-0 z-50" />
 
       {/* Page Hero Section */}
       <section className="relative overflow-hidden border-b border-border pt-[72px]">
-        <div className="brand-grid pointer-events-none absolute inset-0" />
+        <div className="brand-aurora pointer-events-none absolute inset-0" />
+        <BrandWaves className="absolute inset-x-0 bottom-0 h-72 w-full" />
 
         <div className="relative mx-auto max-w-4xl px-6 py-14 sm:px-10 lg:py-20">
           <Link
@@ -54,7 +56,7 @@ export function StaticPageShell({
 
           <div className="mt-8 flex items-center gap-3">
             <span className="h-px w-8 bg-primary" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">
               {tCommon("appName")} · {pageNumber} / {pageTotal}
             </span>
           </div>
@@ -75,7 +77,7 @@ export function StaticPageShell({
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-14 sm:px-10 lg:grid-cols-[240px_1fr] lg:py-20">
         {/* Table Of Contents Section */}
         <aside className="lg:sticky lg:top-[104px] lg:self-start">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
             {tocHeading}
           </p>
           <nav className="mt-4">
