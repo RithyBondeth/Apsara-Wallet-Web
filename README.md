@@ -7,12 +7,30 @@ Tailwind CSS, following the same conventions as `apsaratalent-web`.
 Beyond marketing, this site exists to satisfy the public-URL requirements that
 Google Play and the App Store impose on an account-based app:
 
-| Requirement                     | Route             |
-| ------------------------------- | ----------------- |
-| Privacy Policy URL              | `/privacy`        |
-| Terms of Service URL            | `/terms`          |
-| Account deletion request URL    | `/delete-account` |
-| Support / contact URL           | `/support`        |
+| Requirement                  | Route             |
+| ---------------------------- | ----------------- |
+| Privacy Policy URL           | `/privacy`        |
+| Terms of Service URL         | `/terms`          |
+| Account deletion request URL | `/delete-account` |
+| Support / contact URL        | `/support`        |
+
+<!-- product-images:start -->
+
+## Product preview
+
+<p align="center">
+  <img src="docs/product-images/hero.png" alt="Apsara Wallet — Personal finance for Cambodia, in riel and dollars." width="100%">
+</p>
+
+<table>
+<tr>
+  <td width="33%"><img src="docs/product-images/feature-01.png" alt="Every wallet. One clear view. — Keep cash, bank, and mobile-money balances separate." width="100%"></td>
+  <td width="33%"><img src="docs/product-images/feature-02.png" alt="Budgets that hold. — Set a monthly limit and follow spending by category." width="100%"></td>
+  <td width="33%"><img src="docs/product-images/feature-03.png" alt="Goals worth saving for. — Name a goal, set a target, and track your progress." width="100%"></td>
+</tr>
+</table>
+
+<!-- product-images:end -->
 
 ## Getting started
 
@@ -27,26 +45,26 @@ Turbopack. (`apsaratalent-web` owns port 4000, so both can run side by side.)
 
 ## Scripts
 
-| Script              | What it does                                     |
-| ------------------- | ------------------------------------------------ |
-| `npm run dev`       | Dev server on port 4100 with Turbopack           |
-| `npm run build`     | Production build                                 |
-| `npm start`         | Serve the production build                       |
+| Script              | What it does                                        |
+| ------------------- | --------------------------------------------------- |
+| `npm run dev`       | Dev server on port 4100 with Turbopack              |
+| `npm run build`     | Production build                                    |
+| `npm start`         | Serve the production build                          |
 | `npm run lint`      | ESLint (`next/core-web-vitals` + `next/typescript`) |
-| `npm run typecheck` | `tsc --noEmit`                                   |
-| `npm run verify`    | lint → typecheck → build, in one shot            |
+| `npm run typecheck` | `tsc --noEmit`                                      |
+| `npm run verify`    | lint → typecheck → build, in one shot               |
 
 ## Environment
 
 Copy `.env.example` to `.env.local`. Every variable is optional in development —
 each falls back to a sensible default.
 
-| Variable                       | Purpose                                                     |
-| ------------------------------ | ----------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`         | Canonical origin for metadata, `sitemap.xml` and `robots.txt` |
-| `NEXT_PUBLIC_SUPPORT_EMAIL`    | Mailbox shown on Support, Delete Account and the footer     |
-| `NEXT_PUBLIC_PLAY_STORE_URL`   | Google Play listing — blank renders a disabled "coming soon" button |
-| `NEXT_PUBLIC_APP_STORE_URL`    | App Store listing — same fallback                           |
+| Variable                     | Purpose                                                             |
+| ---------------------------- | ------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`       | Canonical origin for metadata, `sitemap.xml` and `robots.txt`       |
+| `NEXT_PUBLIC_SUPPORT_EMAIL`  | Mailbox shown on Support, Delete Account and the footer             |
+| `NEXT_PUBLIC_PLAY_STORE_URL` | Google Play listing — blank renders a disabled "coming soon" button |
+| `NEXT_PUBLIC_APP_STORE_URL`  | App Store listing — same fallback                                   |
 
 ## Project structure
 
