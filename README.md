@@ -13,18 +13,36 @@
 
 </div>
 
+<!-- product-images:start -->
+
+## Product preview
+
+<p align="center">
+  <img src="docs/product-images/hero.png" alt="Apsara Wallet — Personal finance for Cambodia, in riel and dollars." width="100%">
+</p>
+
+<table>
+<tr>
+  <td width="33%"><img src="docs/product-images/feature-01.png" alt="Every wallet. One clear view. — Keep cash, bank, and mobile-money balances separate." width="100%"></td>
+  <td width="33%"><img src="docs/product-images/feature-02.png" alt="Budgets that hold. — Set a monthly limit and follow spending by category." width="100%"></td>
+  <td width="33%"><img src="docs/product-images/feature-03.png" alt="Goals worth saving for. — Name a goal, set a target, and track your progress." width="100%"></td>
+</tr>
+</table>
+
+<!-- product-images:end -->
+
 ---
 
 ## Overview
 
 Apsara Wallet Web is the public website for the [Apsara Wallet](https://github.com/RithyBondeth/Apsara-Wallet-Mobile) mobile app. Besides marketing the app, it hosts the public URLs that Google Play and the App Store require for an account-based app:
 
-| Requirement | Route |
-| --- | --- |
-| Privacy policy | `/privacy` |
-| Terms of service | `/terms` |
+| Requirement              | Route             |
+| ------------------------ | ----------------- |
+| Privacy policy           | `/privacy`        |
+| Terms of service         | `/terms`          |
 | Account deletion request | `/delete-account` |
-| Support and contact | `/support` |
+| Support and contact      | `/support`        |
 
 ## Features
 
@@ -37,14 +55,14 @@ Apsara Wallet Web is the public website for the [Apsara Wallet](https://github.c
 
 ## Tech Stack
 
-| Area | Technology |
-| --- | --- |
-| Framework | Next.js 15 (App Router, Turbopack) |
-| Language | TypeScript |
-| Styling | Tailwind CSS, shadcn/ui |
-| Internationalization | next-intl |
-| State management | Zustand |
-| Deployment | Vercel |
+| Area                 | Technology                         |
+| -------------------- | ---------------------------------- |
+| Framework            | Next.js 15 (App Router, Turbopack) |
+| Language             | TypeScript                         |
+| Styling              | Tailwind CSS, shadcn/ui            |
+| Internationalization | next-intl                          |
+| State management     | Zustand                            |
+| Deployment           | Vercel                             |
 
 ## Getting Started
 
@@ -66,23 +84,23 @@ Open [http://localhost:4100](http://localhost:4100).
 
 ### Environment Variables
 
-| Variable | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical origin for metadata, sitemap, and robots |
-| `NEXT_PUBLIC_SUPPORT_EMAIL` | Support mailbox shown on the site |
+| Variable                                                  | Purpose                                                          |
+| --------------------------------------------------------- | ---------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`                                    | Canonical origin for metadata, sitemap, and robots               |
+| `NEXT_PUBLIC_SUPPORT_EMAIL`                               | Support mailbox shown on the site                                |
 | `NEXT_PUBLIC_PLAY_STORE_URL`, `NEXT_PUBLIC_APP_STORE_URL` | Store listing links (left blank, the buttons show "coming soon") |
-| `APPLE_TEAM_ID`, `ANDROID_CERT_SHA256` | Universal Links and App Links association files |
+| `APPLE_TEAM_ID`, `ANDROID_CERT_SHA256`                    | Universal Links and App Links association files                  |
 
 ### Scripts
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the development server on port 4100 |
-| `npm run build` | Create a production build |
-| `npm start` | Serve the production build |
-| `npm run lint` | Run ESLint |
-| `npm run typecheck` | Type-check with `tsc --noEmit` |
-| `npm run verify` | Lint, type-check, and build |
+| Command             | Description                               |
+| ------------------- | ----------------------------------------- |
+| `npm run dev`       | Start the development server on port 4100 |
+| `npm run build`     | Create a production build                 |
+| `npm start`         | Serve the production build                |
+| `npm run lint`      | Run ESLint                                |
+| `npm run typecheck` | Type-check with `tsc --noEmit`            |
+| `npm run verify`    | Lint, type-check, and build               |
 
 ## Project Structure
 
