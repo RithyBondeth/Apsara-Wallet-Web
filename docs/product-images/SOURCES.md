@@ -7,6 +7,4 @@ The artwork uses original project logos and interface captures. Workflow graphic
 
 Repository: https://github.com/RithyBondeth/Apsara-Wallet-Web
 
-Original published store panels, preserved in their existing design.
-
 The mobile panels use the Flutter project's wallet, budget, and savings goal test captures.
